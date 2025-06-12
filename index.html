@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Progreso Gym</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="icon-192x192.png">
+    <link rel="apple-touch-icon" href="icon-192x192.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏋️ Mi Progreso Gym</h1>
+        </header>
+        
+        <nav>
+            <button id="btnEjercicios" class="active">💪 Ejercicios</button>
+            <button id="btnPeso">⚖️ Mi Peso</button>
+        </nav>
+        
+        <main>
+            <!-- SECCIÓN EJERCICIOS -->
+            <section id="seccionEjercicios" class="active-section">
+                <h2>➕ Registrar Ejercicio</h2>
+                <form id="formEjercicio">
+                    <div class="form-group">
+                        <label for="diaEntrenamiento">Día:</label>
+                        <select id="diaEntrenamiento" required>
+                            <option value="">Selecciona...</option>
+                            <option value="Lunes - Espalda">Lunes - Espalda</option>
+                            <option value="Martes - Pecho">Martes - Pecho</option>
+                            <option value="Miércoles - Pierna">Miércoles - Pierna</option>
+                            <option value="Jueves - Espalda">Jueves - Espalda</option>
+                            <option value="Viernes - Pecho">Viernes - Pecho</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="nombreEjercicio">Ejercicio:</label>
+                        <input type="text" id="nombreEjercicio" placeholder="Ej: Press banca" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="pesoLevantado">Peso (kg):</label>
+                        <input type="number" id="pesoLevantado" step="0.5" placeholder="Ej: 50.5" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="repeticiones">Repeticiones:</label>
+                        <input type="number" id="repeticiones" placeholder="Ej: 8" required>
+                    </div>
+                    
+                    <button type="submit">💾 Guardar</button>
+                </form>
+                
+                <h2>📅 Mi Rutina Semanal</h2>
+                <div id="rutinaSemanal"></div>
+            </section>
+            
+            <!-- SECCIÓN PESO -->
+            <section id="seccionPeso">
+                <h2>📊 Registrar Mi Peso</h2>
+                <form id="formPeso">
+                    <div class="form-group">
+                        <label for="pesoActual">Peso (kg):</label>
+                        <input type="number" id="pesoActual" step="0.1" placeholder="Ej: 75.3" required>
+                    </div>
+                    
+                    <button type="submit">💾 Guardar</button>
+                </form>
+                
+                <h2>📈 Evolución de Peso</h2>
+                <div id="historialPeso"></div>
+            </section>
+        </main>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
