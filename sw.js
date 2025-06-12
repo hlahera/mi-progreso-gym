@@ -1,11 +1,11 @@
-const CACHE_NAME = 'mi-gym-v4';
+const CACHE_NAME = 'gym-progreso-v1';
 const ASSETS = [
     '/',
     '/index.html',
     '/styles.css',
     '/app.js',
     '/manifest.json',
-    '/gg.jpg', 
+    '/gg.jpg',
     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'
 ];
 
@@ -13,7 +13,6 @@ self.addEventListener('install', (e) => {
     e.waitUntil(
         caches.open(CACHE_NAME)
             .then(cache => cache.addAll(ASSETS))
-            .then(() => self.skipWaiting())
     );
 });
 
