@@ -7,8 +7,7 @@
     --texto-principal: #F5F5F5;
     --texto-secundario: #BDBDBD;
     --bordes: #333333;
-    --sombra: rgba(0, 0, 0, 0.3);
-  }
+}
   
   * {
     box-sizing: border-box;
@@ -319,7 +318,7 @@
     border-top: 1px solid var(--bordes);
     background: rgba(0, 0, 0, 0.3);
     border-radius: 8px;
-  }
+}
   
   @media (pointer: fine) {
     input,
