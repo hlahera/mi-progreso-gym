@@ -5,8 +5,7 @@ const ASSETS = [
     '/styles.css',
     '/app.js',
     '/manifest.json',
-    '/gg.png',
-    '/icon-512x512.png',
+    '/gg.jpg', 
     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'
 ];
 
