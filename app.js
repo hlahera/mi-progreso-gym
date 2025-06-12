@@ -184,13 +184,16 @@ function cargarHistorialPeso() {
         const registroElement = document.createElement('div');
         registroElement.className = 'registro-peso';
         registroElement.innerHTML = `
-            <span class="peso"><i class="fas fa-weight-hanging"></i> ${p.peso} ${p.unidad}</span>
-            <span class="fecha"><i class="fas fa-calendar"></i> ${formatFecha(p.fecha)}</span>
+            <div class="info-peso">
+                <span class="peso"><i class="fas fa-weight-hanging"></i> ${p.peso} ${p.unidad}</span>
+                <span class="fecha"><i class="fas fa-calendar"></i> ${formatFecha(p.fecha)}</span>
+            </div>
         `;
         
         historialPeso.appendChild(registroElement);
     });
 }
+
 function editarEjercicio(id) {
     const ej = ejercicios.find(e => e.id === id);
     if (!ej) return;
@@ -203,11 +206,9 @@ function editarEjercicio(id) {
     document.getElementById('repMin').value = ej.repMin;
     document.getElementById('repMax').value = ej.repMax;
     
-    // Eliminar el ejercicio del array
     ejercicios = ejercicios.filter(e => e.id !== id);
     localStorage.setItem('ejercicios', JSON.stringify(ejercicios));
     cargarRutinaSemanal();
-    
     mostrarNotificacion('Ejercicio cargado para editar');
 }
 
@@ -219,8 +220,6 @@ function eliminarEjercicio(id) {
         mostrarNotificacion('Ejercicio eliminado');
     }
 }
-
-
 
 function formatFecha(fechaStr) {
     const opciones = { year: 'numeric', month: 'short', day: 'numeric' };
@@ -245,6 +244,6 @@ function mostrarNotificacion(mensaje, tipo = 'exito') {
     }, 3000);
 }
 
-// Hacer funciones accesibles globalmente
+// Hacer funciones accesibles globalmente (solo las de ejercicios)
 window.editarEjercicio = editarEjercicio;
 window.eliminarEjercicio = eliminarEjercicio;
