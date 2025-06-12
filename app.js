@@ -7,6 +7,17 @@ function generarId() {
     return Date.now().toString(36) + Math.random().toString(36).substr(2);
 }
 
+// Función para obtener fecha local legible
+function obtenerFechaLegible() {
+    return new Date().toLocaleDateString('es-ES', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+}
+
 // DOM Elements
 const secciones = {
     ejercicios: document.getElementById('seccionEjercicios'),
@@ -67,7 +78,8 @@ function guardarEjercicio(e) {
         unidad: document.getElementById('unidadPeso').value,
         repMin: parseInt(document.getElementById('repMin').value),
         repMax: parseInt(document.getElementById('repMax').value),
-        fecha: new Date().toISOString().split('T')[0]
+        fecha: new Date().toISOString(),  // Guardamos fecha completa
+        fechaLegible: obtenerFechaLegible()  // Y versión legible
     };
     
     if (!validarEjercicio(ejercicio)) return;
@@ -87,7 +99,8 @@ function guardarPeso(e) {
         id: generarId(),
         peso: parseFloat(document.getElementById('pesoActual').value),
         unidad: document.getElementById('unidadPesoActual').value,
-        fecha: new Date().toISOString().split('T')[0]
+        fecha: new Date().toISOString(),  // Guardamos fecha completa
+        fechaLegible: obtenerFechaLegible()  // Y versión legible
     };
     
     if (isNaN(registro.peso)) {
@@ -151,7 +164,7 @@ function cargarRutinaSemanal() {
                 <h4><i class="fas fa-dumbbell"></i> ${ej.nombre}</h4>
                 <p><i class="fas fa-layer-group"></i> ${ej.series} series</p>
                 <p><i class="fas fa-weight-hanging"></i> ${ej.peso} ${ej.unidad} × ${ej.repMin}-${ej.repMax} repes</p>
-                <p><i class="fas fa-calendar"></i> ${formatFecha(ej.fecha)}</p>
+                <p><i class="fas fa-calendar"></i> ${ej.fechaLegible}</p>
             `;
             
             const botones = document.createElement('div');
@@ -186,7 +199,7 @@ function cargarHistorialPeso() {
         registroElement.innerHTML = `
             <div class="info-peso">
                 <span class="peso"><i class="fas fa-weight-hanging"></i> ${p.peso} ${p.unidad}</span>
-                <span class="fecha"><i class="fas fa-calendar"></i> ${formatFecha(p.fecha)}</span>
+                <span class="fecha"><i class="fas fa-calendar"></i> ${p.fechaLegible}</span>
             </div>
         `;
         
@@ -221,11 +234,6 @@ function eliminarEjercicio(id) {
     }
 }
 
-function formatFecha(fechaStr) {
-    const opciones = { year: 'numeric', month: 'short', day: 'numeric' };
-    return new Date(fechaStr).toLocaleDateString('es-ES', opciones);
-}
-
 function mostrarNotificacion(mensaje, tipo = 'exito') {
     const notificacion = document.createElement('div');
     notificacion.className = `notificacion ${tipo}`;
@@ -244,6 +252,6 @@ function mostrarNotificacion(mensaje, tipo = 'exito') {
     }, 3000);
 }
 
-// Hacer funciones accesibles globalmente (solo las de ejercicios)
+// Hacer funciones accesibles globalmente
 window.editarEjercicio = editarEjercicio;
 window.eliminarEjercicio = eliminarEjercicio;
