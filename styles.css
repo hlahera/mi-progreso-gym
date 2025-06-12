@@ -192,6 +192,11 @@ button[type="submit"]:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background: white;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border-left: 4px solid #0071e3;
 }
 
 .registro-peso .peso {
