@@ -27,7 +27,54 @@
             <section id="seccionEjercicios" class="active-section">
                 <h2><i class="fas fa-plus-circle"></i> Registrar Ejercicio</h2>
                 <form id="formEjercicio">
-                    <!-- Campos del formulario... -->
+                   <div class="form-group">
+                        <label for="diaEntrenamiento"><i class="fas fa-calendar-day"></i> Día:</label>
+                        <select id="diaEntrenamiento" required>
+                            <option value="">Selecciona...</option>
+                            <option value="Lunes - Espalda">Lunes - Espalda</option>
+                            <option value="Martes - Pecho">Martes - Pecho</option>
+                            <option value="Miércoles - Pierna">Miércoles - Pierna</option>
+                            <option value="Jueves - Espalda">Jueves - Espalda</option>
+                            <option value="Viernes - Pecho">Viernes - Pecho</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="nombreEjercicio"><i class="fas fa-dumbbell"></i> Ejercicio:</label>
+                        <input type="text" id="nombreEjercicio" placeholder="Ej: Press banca" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="series"><i class="fas fa-layer-group"></i> Series:</label>
+                        <input type="number" id="series" placeholder="Ej: 3" min="1" max="20" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="pesoLevantado"><i class="fas fa-weight-hanging"></i> Peso:</label>
+                        <div class="input-group">
+                            <input type="number" id="pesoLevantado" step="0.5" placeholder="Ej: 60.5" required>
+                            <select id="unidadPeso" class="input-group-select">
+                                <option value="kg">kg</option>
+                                <option value="lb">lb</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="repeticiones"><i class="fas fa-redo"></i> Repeticiones (rango):</label>
+                        <div class="rep-range">
+                            <input type="number" id="repMin" placeholder="8" min="1" max="50" required>
+                            <span>a</span>
+                            <input type="number" id="repMax" placeholder="12" min="1" max="50" required>
+                        </div>
+                    </div>
+                    
+                    <button type="submit"><i class="fas fa-save"></i> Guardar</button>
+                </form>
+                
+                <h2><i class="fas fa-calendar-week"></i> Mi Rutina Semanal</h2>
+                <div id="rutinaSemanal"></div>
+            </section>
                 </form>
                 
                 <h2><i class="fas fa-calendar-week"></i> Mi Rutina Semanal</h2>
@@ -38,6 +85,23 @@
                 <h2><i class="fas fa-chart-line"></i> Registrar Mi Peso</h2>
                 <form id="formPeso">
                     <!-- Campos del formulario... -->
+                     <div class="form-group">
+                        <label for="pesoActual"><i class="fas fa-weight"></i> Peso:</label>
+                        <div class="input-group">
+                            <input type="number" id="pesoActual" step="0.1" placeholder="Ej: 75.3" required>
+                            <select id="unidadPesoActual" class="input-group-select">
+                                <option value="kg">kg</option>
+                                <option value="lb">lb</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button type="submit"><i class="fas fa-save"></i> Guardar</button>
+                </form>
+                
+                <h2><i class="fas fa-chart-bar"></i> Evolución de Peso</h2>
+                <div id="historialPeso"></div>
+            </section>
                 </form>
                 
                 <h2><i class="fas fa-chart-bar"></i> Evolución de Peso</h2>
