@@ -238,6 +238,8 @@ button[type="submit"]:hover {
     margin-bottom: 10px;
     border-left: 4px solid #FF7D33;
     transition: transform 0.2s;
+    position: relative;
+    padding-right: 60px;
 }
 
 .registro-peso:hover {
