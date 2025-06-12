@@ -7,15 +7,15 @@
     "description": "Registro de entrenamiento y peso",
     "icons": [
         {
-            "src": "gg.png",
+            "src": "gg.jng",
             "sizes": "192x192",
-            "type": "image/png",
+           "type": "image/jpeg"
             "purpose": "any maskable"
         },
         {
-            "src": "gg.png",
+            "src": "gg.jng",
             "sizes": "512x512",
-            "type": "image/png",
+           "type": "image/jpeg"
             "purpose": "any maskable"
         }
     ],
