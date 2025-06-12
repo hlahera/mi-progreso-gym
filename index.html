@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gym Progreso</title>
+    <title>Mi Progreso Gym</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="manifest" href="manifest.json">
-    <link rel="icon" href="gg.jpg">
-    <link rel="apple-touch-icon" href="gg.jpg">
+    <link rel="icon" href="icon-192x192.png">
+    <link rel="apple-touch-icon" href="icon-192x192.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1><i class="fas fa-dumbbell"></i> Gym Progreso</h1>
+            <h1><i class="fas fa-dumbbell"></i> Mi Progreso Gym</h1>
         </header>
         
         <nav>
@@ -24,10 +24,11 @@
         </nav>
         
         <main>
+            <!-- SECCIÓN EJERCICIOS -->
             <section id="seccionEjercicios" class="active-section">
                 <h2><i class="fas fa-plus-circle"></i> Registrar Ejercicio</h2>
                 <form id="formEjercicio">
-                   <div class="form-group">
+                    <div class="form-group">
                         <label for="diaEntrenamiento"><i class="fas fa-calendar-day"></i> Día:</label>
                         <select id="diaEntrenamiento" required>
                             <option value="">Selecciona...</option>
@@ -75,17 +76,12 @@
                 <h2><i class="fas fa-calendar-week"></i> Mi Rutina Semanal</h2>
                 <div id="rutinaSemanal"></div>
             </section>
-                </form>
-                
-                <h2><i class="fas fa-calendar-week"></i> Mi Rutina Semanal</h2>
-                <div id="rutinaSemanal"></div>
-            </section>
             
+            <!-- SECCIÓN PESO -->
             <section id="seccionPeso">
                 <h2><i class="fas fa-chart-line"></i> Registrar Mi Peso</h2>
                 <form id="formPeso">
-                    <!-- Campos del formulario... -->
-                     <div class="form-group">
+                    <div class="form-group">
                         <label for="pesoActual"><i class="fas fa-weight"></i> Peso:</label>
                         <div class="input-group">
                             <input type="number" id="pesoActual" step="0.1" placeholder="Ej: 75.3" required>
@@ -102,17 +98,8 @@
                 <h2><i class="fas fa-chart-bar"></i> Evolución de Peso</h2>
                 <div id="historialPeso"></div>
             </section>
-                </form>
-                
-                <h2><i class="fas fa-chart-bar"></i> Evolución de Peso</h2>
-                <div id="historialPeso"></div>
-            </section>
         </main>
     </div>
-    
-    <footer class="footer-dev">
-        <p>Aplicación en desarrollo - Creada por Harold</p>
-    </footer>
     
     <script src="app.js"></script>
 </body>
