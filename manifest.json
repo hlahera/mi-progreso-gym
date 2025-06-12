@@ -1,21 +1,21 @@
 {
-    "name": "Gym Progreso",
-    "short_name": "Gym Prog",
+    "name": "Mi Progreso Gym",
+    "short_name": "MiGym",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#121212",
+    "background_color": "#ffffff",
     "description": "Registro de entrenamiento y peso",
     "icons": [
         {
-            "src": "gg.jpg",
+            "src": "icon-192x192.png",
             "sizes": "192x192",
-            "type": "image/jpeg"
+            "type": "image/png"
         },
         {
-            "src": "gg.jpg",
+            "src": "icon-512x512.png",
             "sizes": "512x512",
-            "type": "image/jpeg"
+            "type": "image/png"
         }
     ],
-    "theme_color": "#FF7B25"
+    "theme_color": "#0071e3"
 }
