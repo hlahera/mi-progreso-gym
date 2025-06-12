@@ -188,18 +188,9 @@ function cargarHistorialPeso() {
             <span class="fecha"><i class="fas fa-calendar"></i> ${formatFecha(p.fecha)}</span>
         `;
         
-        const botones = document.createElement('div');
-        botones.className = 'botones-edicion';
-        botones.innerHTML = `
-            <button onclick="editarPeso('${p.id}')"><i class="fas fa-edit"></i></button>
-            <button onclick="eliminarPeso('${p.id}')"><i class="fas fa-trash"></i></button>
-        `;
-        
-        registroElement.appendChild(botones);
         historialPeso.appendChild(registroElement);
     });
 }
-
 function editarEjercicio(id) {
     const ej = ejercicios.find(e => e.id === id);
     if (!ej) return;
@@ -229,29 +220,7 @@ function eliminarEjercicio(id) {
     }
 }
 
-function editarPeso(id) {
-    const p = pesos.find(p => p.id === id);
-    if (!p) return;
-    
-    document.getElementById('pesoActual').value = p.peso;
-    document.getElementById('unidadPesoActual').value = p.unidad;
-    
-    // Eliminar el peso del array
-    pesos = pesos.filter(p => p.id !== id);
-    localStorage.setItem('pesos', JSON.stringify(pesos));
-    cargarHistorialPeso();
-    
-    mostrarNotificacion('Peso cargado para editar');
-}
 
-function eliminarPeso(id) {
-    if (confirm('¿Eliminar este registro de peso?')) {
-        pesos = pesos.filter(p => p.id !== id);
-        localStorage.setItem('pesos', JSON.stringify(pesos));
-        cargarHistorialPeso();
-        mostrarNotificacion('Registro de peso eliminado');
-    }
-}
 
 function formatFecha(fechaStr) {
     const opciones = { year: 'numeric', month: 'short', day: 'numeric' };
@@ -279,5 +248,3 @@ function mostrarNotificacion(mensaje, tipo = 'exito') {
 // Hacer funciones accesibles globalmente
 window.editarEjercicio = editarEjercicio;
 window.eliminarEjercicio = eliminarEjercicio;
-window.editarPeso = editarPeso;
-window.eliminarPeso = eliminarPeso;
