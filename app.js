@@ -67,7 +67,7 @@ function guardarEjercicio(e) {
         unidad: document.getElementById('unidadPeso').value,
         repMin: parseInt(document.getElementById('repMin').value),
         repMax: parseInt(document.getElementById('repMax').value),
-        fecha: new Date().toISOString().split('T')[0]
+        fecha: new Date().toISOString() // Usar fecha/hora actual del dispositivo
     };
     
     if (!validarEjercicio(ejercicio)) return;
@@ -87,7 +87,7 @@ function guardarPeso(e) {
         id: generarId(),
         peso: parseFloat(document.getElementById('pesoActual').value),
         unidad: document.getElementById('unidadPesoActual').value,
-        fecha: new Date().toISOString().split('T')[0]
+        fecha: new Date().toISOString() // Usar fecha/hora actual del dispositivo
     };
     
     if (isNaN(registro.peso)) {
@@ -203,6 +203,9 @@ function cargarHistorialPeso() {
                 <span class="peso"><i class="fas fa-weight-hanging"></i> ${p.peso} ${p.unidad}</span>
                 <span class="fecha"><i class="fas fa-calendar"></i> ${formatFecha(p.fecha)}</span>
             </div>
+            <div class="botones-edicion">
+                <button onclick="eliminarPeso('${p.id}')" aria-label="Eliminar"><i class="fas fa-trash"></i></button>
+            </div>
         `;
         
         historialPeso.appendChild(registroElement);
@@ -236,9 +239,26 @@ function eliminarEjercicio(id) {
     }
 }
 
+// Nueva función para eliminar peso
+function eliminarPeso(id) {
+    if (confirm('¿Estás seguro de eliminar este registro de peso?')) {
+        pesos = pesos.filter(p => p.id !== id);
+        localStorage.setItem('pesos', JSON.stringify(pesos));
+        cargarHistorialPeso();
+        mostrarNotificacion('🗑️ Registro de peso eliminado');
+    }
+}
+
 function formatFecha(fechaStr) {
-    const opciones = { year: 'numeric', month: 'short', day: 'numeric' };
-    return new Date(fechaStr).toLocaleDateString('es-ES', opciones);
+    const fecha = new Date(fechaStr);
+    const opciones = { 
+        year: 'numeric', 
+        month: 'short', 
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+    };
+    return fecha.toLocaleDateString('es-ES', opciones);
 }
 
 function mostrarNotificacion(mensaje, tipo = 'exito') {
@@ -262,3 +282,4 @@ function mostrarNotificacion(mensaje, tipo = 'exito') {
 // Hacer funciones accesibles globalmente
 window.editarEjercicio = editarEjercicio;
 window.eliminarEjercicio = eliminarEjercicio;
+window.eliminarPeso = eliminarPeso;
