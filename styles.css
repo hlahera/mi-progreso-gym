@@ -167,13 +167,14 @@ button[type="submit"]:hover {
     margin-bottom: 10px;
 }
 
-.ejercicio-item, .registro-peso {
+.ejercicio-item {
     background: white;
     padding: 12px;
     border-radius: 8px;
     margin-bottom: 10px;
     border-left: 4px solid #0071e3;
     position: relative;
+    padding-right: 60px;
 }
 
 .ejercicio-item h4 {
@@ -182,16 +183,21 @@ button[type="submit"]:hover {
     margin-bottom: 5px;
 }
 
-.ejercicio-item p, .registro-peso .fecha {
+.ejercicio-item p {
     color: #666;
     font-size: 14px;
     margin: 5px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ejercicio-item p i {
+    width: 20px;
+    color: #0071e3;
 }
 
 .registro-peso {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     background: white;
     padding: 12px;
     border-radius: 8px;
@@ -199,17 +205,28 @@ button[type="submit"]:hover {
     border-left: 4px solid #0071e3;
 }
 
-.registro-peso .peso {
+.info-peso {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.info-peso .peso {
     font-weight: bold;
     color: #0071e3;
 }
 
+.info-peso .fecha {
+    color: #666;
+    font-size: 14px;
+}
+
 .botones-edicion {
-    display: flex;
-    gap: 8px;
     position: absolute;
     top: 10px;
     right: 10px;
+    display: flex;
+    gap: 8px;
 }
 
 .botones-edicion button {
@@ -227,7 +244,6 @@ button[type="submit"]:hover {
     transform: scale(1.1);
 }
 
-/* Estilos para notificaciones */
 .notificacion {
     position: fixed;
     bottom: 20px;
@@ -257,19 +273,6 @@ button[type="submit"]:hover {
 
 .notificacion i {
     font-size: 1.2rem;
-}
-
-/* Estilo para items de ejercicio */
-.ejercicio-item p {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 5px 0;
-}
-
-.ejercicio-item p i {
-    width: 20px;
-    color: #0071e3;
 }
 
 @media (pointer: fine) {
