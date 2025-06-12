@@ -27,8 +27,8 @@ const forms = {
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('sw.js')
-            .then(reg => console.log('✅ SW registrado:', reg.scope))
-            .catch(err => console.error('❌ Falló SW:', err));
+            .then(reg => console.log('✅ Service Worker registrado:', reg.scope))
+            .catch(err => console.error('❌ Falló el Service Worker:', err));
     });
 }
 
@@ -77,7 +77,7 @@ function guardarEjercicio(e) {
     
     forms.ejercicio.reset();
     cargarRutinaSemanal();
-    mostrarNotificacion('Ejercicio guardado correctamente');
+    mostrarNotificacion('🏋️‍♂️ Ejercicio guardado correctamente');
 }
 
 function guardarPeso(e) {
@@ -91,7 +91,7 @@ function guardarPeso(e) {
     };
     
     if (isNaN(registro.peso)) {
-        mostrarNotificacion('Ingresa un peso válido', 'error');
+        mostrarNotificacion('⚠️ Ingresa un peso válido', 'error');
         return;
     }
     
@@ -100,13 +100,13 @@ function guardarPeso(e) {
     
     forms.peso.reset();
     cargarHistorialPeso();
-    mostrarNotificacion('Peso guardado correctamente');
+    mostrarNotificacion('⚖️ Peso guardado correctamente');
 }
 
 function validarEjercicio(ej) {
     if (!ej.dia || !ej.nombre || isNaN(ej.series) || isNaN(ej.peso) || 
         isNaN(ej.repMin) || isNaN(ej.repMax) || ej.repMin > ej.repMax) {
-        mostrarNotificacion('Completa todos los campos correctamente', 'error');
+        mostrarNotificacion('⚠️ Completa todos los campos correctamente', 'error');
         return false;
     }
     return true;
@@ -124,6 +124,16 @@ function cargarRutinaSemanal() {
         'Viernes - Pecho'
     ];
     
+    if (ejercicios.length === 0) {
+        rutinaSemanal.innerHTML = `
+            <div class="empty-state">
+                <i class="fas fa-dumbbell"></i>
+                <p>No hay ejercicios registrados aún</p>
+            </div>
+        `;
+        return;
+    }
+    
     dias.forEach(dia => {
         const ejerciciosDia = ejercicios.filter(ej => ej.dia === dia);
         if (ejerciciosDia.length === 0) return;
@@ -134,8 +144,8 @@ function cargarRutinaSemanal() {
         
         ejerciciosDia.sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
         
-        const ejerciciosUnicos = [];
         const nombresVistos = new Set();
+        const ejerciciosUnicos = [];
         
         ejerciciosDia.forEach(ej => {
             if (!nombresVistos.has(ej.nombre)) {
@@ -157,8 +167,8 @@ function cargarRutinaSemanal() {
             const botones = document.createElement('div');
             botones.className = 'botones-edicion';
             botones.innerHTML = `
-                <button onclick="editarEjercicio('${ej.id}')"><i class="fas fa-edit"></i></button>
-                <button onclick="eliminarEjercicio('${ej.id}')"><i class="fas fa-trash"></i></button>
+                <button onclick="editarEjercicio('${ej.id}')" aria-label="Editar"><i class="fas fa-edit"></i></button>
+                <button onclick="eliminarEjercicio('${ej.id}')" aria-label="Eliminar"><i class="fas fa-trash"></i></button>
             `;
             
             ejercicioElement.appendChild(botones);
@@ -174,7 +184,12 @@ function cargarHistorialPeso() {
     historialPeso.innerHTML = '';
     
     if (pesos.length === 0) {
-        historialPeso.innerHTML = '<p>No hay registros de peso aún.</p>';
+        historialPeso.innerHTML = `
+            <div class="empty-state">
+                <i class="fas fa-weight"></i>
+                <p>No hay registros de peso aún</p>
+            </div>
+        `;
         return;
     }
     
@@ -209,15 +224,15 @@ function editarEjercicio(id) {
     ejercicios = ejercicios.filter(e => e.id !== id);
     localStorage.setItem('ejercicios', JSON.stringify(ejercicios));
     cargarRutinaSemanal();
-    mostrarNotificacion('Ejercicio cargado para editar');
+    mostrarNotificacion('✏️ Ejercicio cargado para editar');
 }
 
 function eliminarEjercicio(id) {
-    if (confirm('¿Eliminar este ejercicio?')) {
+    if (confirm('¿Estás seguro de eliminar este ejercicio?')) {
         ejercicios = ejercicios.filter(e => e.id !== id);
         localStorage.setItem('ejercicios', JSON.stringify(ejercicios));
         cargarRutinaSemanal();
-        mostrarNotificacion('Ejercicio eliminado');
+        mostrarNotificacion('🗑️ Ejercicio eliminado');
     }
 }
 
@@ -244,6 +259,6 @@ function mostrarNotificacion(mensaje, tipo = 'exito') {
     }, 3000);
 }
 
-// Hacer funciones accesibles globalmente (solo las de ejercicios)
+// Hacer funciones accesibles globalmente
 window.editarEjercicio = editarEjercicio;
 window.eliminarEjercicio = eliminarEjercicio;
