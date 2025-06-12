@@ -3,32 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Progreso Gym</title>
+    <title>Gym Progreso</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="manifest" href="manifest.json">
-    <link rel="icon" href="icon-192x192.png">
-    <link rel="apple-touch-icon" href="icon-192x192.png">
+    <link rel="icon" href="gg.png">
+<link rel="apple-touch-icon" href="gg.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+   
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🏋️ Mi Progreso Gym</h1>
+            <h1><i class="fas fa-dumbbell"></i> progress</h1>
         </header>
         
         <nav>
-            <button id="btnEjercicios" class="active">💪 Ejercicios</button>
-            <button id="btnPeso">⚖️ Mi Peso</button>
+            <button id="btnEjercicios" class="active"><i class="fas fa-running"></i> Ejercicios</button>
+            <button id="btnPeso"><i class="fas fa-weight"></i> Mi Peso</button>
         </nav>
         
         <main>
             <!-- SECCIÓN EJERCICIOS -->
             <section id="seccionEjercicios" class="active-section">
-                <h2>➕ Registrar Ejercicio</h2>
+                <h2><i class="fas fa-plus-circle"></i> Registrar Ejercicio</h2>
                 <form id="formEjercicio">
                     <div class="form-group">
-                        <label for="diaEntrenamiento">Día:</label>
+                        <label for="diaEntrenamiento"><i class="fas fa-calendar-day"></i> Día:</label>
                         <select id="diaEntrenamiento" required>
                             <option value="">Selecciona...</option>
                             <option value="Lunes - Espalda">Lunes - Espalda</option>
@@ -40,45 +42,68 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="nombreEjercicio">Ejercicio:</label>
+                        <label for="nombreEjercicio"><i class="fas fa-dumbbell"></i> Ejercicio:</label>
                         <input type="text" id="nombreEjercicio" placeholder="Ej: Press banca" required>
                     </div>
                     
                     <div class="form-group">
-                        <label for="pesoLevantado">Peso (kg):</label>
-                        <input type="number" id="pesoLevantado" step="0.5" placeholder="Ej: 50.5" required>
+                        <label for="series"><i class="fas fa-layer-group"></i> Series:</label>
+                        <input type="number" id="series" placeholder="Ej: 3" min="1" max="20" required>
                     </div>
                     
                     <div class="form-group">
-                        <label for="repeticiones">Repeticiones:</label>
-                        <input type="number" id="repeticiones" placeholder="Ej: 8" required>
+                        <label for="pesoLevantado"><i class="fas fa-weight-hanging"></i> Peso:</label>
+                        <div class="input-group">
+                            <input type="number" id="pesoLevantado" step="0.5" placeholder="Ej: 60.5" required>
+                            <select id="unidadPeso" class="input-group-select">
+                                <option value="kg">kg</option>
+                                <option value="lb">lb</option>
+                            </select>
+                        </div>
                     </div>
                     
-                    <button type="submit">💾 Guardar</button>
+                    <div class="form-group">
+                        <label for="repeticiones"><i class="fas fa-redo"></i> Repeticiones (rango):</label>
+                        <div class="rep-range">
+                            <input type="number" id="repMin" placeholder="8" min="1" max="50" required>
+                            <span>a</span>
+                            <input type="number" id="repMax" placeholder="12" min="1" max="50" required>
+                        </div>
+                    </div>
+                    
+                    <button type="submit"><i class="fas fa-save"></i> Guardar</button>
                 </form>
                 
-                <h2>📅 Mi Rutina Semanal</h2>
+                <h2><i class="fas fa-calendar-week"></i> Mi Rutina Semanal</h2>
                 <div id="rutinaSemanal"></div>
             </section>
             
             <!-- SECCIÓN PESO -->
             <section id="seccionPeso">
-                <h2>📊 Registrar Mi Peso</h2>
+                <h2><i class="fas fa-chart-line"></i> Registrar Mi Peso</h2>
                 <form id="formPeso">
                     <div class="form-group">
-                        <label for="pesoActual">Peso (kg):</label>
-                        <input type="number" id="pesoActual" step="0.1" placeholder="Ej: 75.3" required>
+                        <label for="pesoActual"><i class="fas fa-weight"></i> Peso:</label>
+                        <div class="input-group">
+                            <input type="number" id="pesoActual" step="0.1" placeholder="Ej: 75.3" required>
+                            <select id="unidadPesoActual" class="input-group-select">
+                                <option value="kg">kg</option>
+                                <option value="lb">lb</option>
+                            </select>
+                        </div>
                     </div>
                     
-                    <button type="submit">💾 Guardar</button>
+                    <button type="submit"><i class="fas fa-save"></i> Guardar</button>
                 </form>
                 
-                <h2>📈 Evolución de Peso</h2>
+                <h2><i class="fas fa-chart-bar"></i> Evolución de Peso</h2>
                 <div id="historialPeso"></div>
             </section>
         </main>
     </div>
-    
+    <footer class="footer-dev">
+        <p>Aplicación en desarrollo - Creada por Harold</p>
+    </footer>
     <script src="app.js"></script>
 </body>
 </html>
