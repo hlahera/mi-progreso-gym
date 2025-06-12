@@ -12,8 +12,8 @@
 }
 
 body {
-    background: #f5f5f7;
-    color: #1d1d1f;
+    background: #f5f5f5;
+    color: #333;
     line-height: 1.6;
     padding: 20px;
 }
@@ -22,9 +22,10 @@ header {
     text-align: center;
     margin-bottom: 20px;
     padding: 15px;
-    background: linear-gradient(90deg, #0071e3, #00a2ff);
+    background: linear-gradient(90deg, #FF7D33, #FF5E00);
     color: white;
     border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(255, 94, 0, 0.2);
 }
 
 header h1 {
@@ -49,11 +50,20 @@ nav button {
     font-size: 16px;
     cursor: pointer;
     transition: all 0.3s;
+    color: #666;
 }
 
 nav button.active {
-    background: #0071e3;
+    background: #FF7D33;
     color: white;
+}
+
+nav button:hover {
+    background: #f0f0f0;
+}
+
+nav button.active:hover {
+    background: #FF5E00;
 }
 
 section {
@@ -72,7 +82,9 @@ section.active-section {
 section h2 {
     font-size: 1.4rem;
     margin-bottom: 15px;
-    color: #0071e3;
+    color: #FF5E00;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 8px;
 }
 
 .form-group {
@@ -83,7 +95,7 @@ label {
     display: block;
     margin-bottom: 5px;
     font-weight: 500;
-    color: #333;
+    color: #444;
 }
 
 input, select {
@@ -92,6 +104,14 @@ input, select {
     border: 1px solid #ddd;
     border-radius: 8px;
     font-size: 16px;
+    background: #fafafa;
+    transition: border 0.3s;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #FF7D33;
+    box-shadow: 0 0 0 2px rgba(255, 125, 51, 0.2);
 }
 
 .input-group {
@@ -105,6 +125,7 @@ input, select {
     flex: 1;
     border: none;
     border-radius: 8px 0 0 8px;
+    background: #fafafa;
 }
 
 .input-group-select {
@@ -112,10 +133,11 @@ input, select {
     border: none;
     border-left: 1px solid #ddd;
     border-radius: 0 8px 8px 0;
-    background: #f5f5f7;
+    background: #f0f0f0;
     appearance: none;
     padding: 12px;
     cursor: pointer;
+    color: #555;
 }
 
 .rep-range {
@@ -136,7 +158,7 @@ input, select {
 button[type="submit"] {
     width: 100%;
     padding: 12px;
-    background: linear-gradient(90deg, #0071e3, #00a2ff);
+    background: linear-gradient(90deg, #FF7D33, #FF5E00);
     color: white;
     border: none;
     border-radius: 8px;
@@ -144,11 +166,14 @@ button[type="submit"] {
     font-weight: bold;
     cursor: pointer;
     margin-top: 20px;
-    transition: background 0.3s;
+    transition: all 0.3s;
+    box-shadow: 0 2px 5px rgba(255, 94, 0, 0.2);
 }
 
 button[type="submit"]:hover {
-    background: #0062c4;
+    background: #FF5E00;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(255, 94, 0, 0.3);
 }
 
 #rutinaSemanal, #historialPeso {
@@ -160,11 +185,15 @@ button[type="submit"]:hover {
     padding: 15px;
     border-radius: 10px;
     margin-bottom: 15px;
+    border-left: 4px solid #FF7D33;
 }
 
 .dia-rutina h3 {
-    color: #0071e3;
+    color: #FF5E00;
     margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .ejercicio-item {
@@ -172,13 +201,18 @@ button[type="submit"]:hover {
     padding: 12px;
     border-radius: 8px;
     margin-bottom: 10px;
-    border-left: 4px solid #0071e3;
+    border-left: 4px solid #FF7D33;
     position: relative;
     padding-right: 60px;
+    transition: transform 0.2s;
+}
+
+.ejercicio-item:hover {
+    transform: translateX(5px);
 }
 
 .ejercicio-item h4 {
-    color: #1d1d1f;
+    color: #333;
     font-size: 1.1rem;
     margin-bottom: 5px;
 }
@@ -194,7 +228,7 @@ button[type="submit"]:hover {
 
 .ejercicio-item p i {
     width: 20px;
-    color: #0071e3;
+    color: #FF7D33;
 }
 
 .registro-peso {
@@ -202,7 +236,12 @@ button[type="submit"]:hover {
     padding: 12px;
     border-radius: 8px;
     margin-bottom: 10px;
-    border-left: 4px solid #0071e3;
+    border-left: 4px solid #FF7D33;
+    transition: transform 0.2s;
+}
+
+.registro-peso:hover {
+    transform: translateX(5px);
 }
 
 .info-peso {
@@ -213,7 +252,7 @@ button[type="submit"]:hover {
 
 .info-peso .peso {
     font-weight: bold;
-    color: #0071e3;
+    color: #FF5E00;
 }
 
 .info-peso .fecha {
@@ -235,12 +274,12 @@ button[type="submit"]:hover {
     font-size: 1rem;
     cursor: pointer;
     padding: 5px;
-    color: #666;
+    color: #999;
     transition: all 0.2s;
 }
 
 .botones-edicion button:hover {
-    color: #0071e3;
+    color: #FF5E00;
     transform: scale(1.1);
 }
 
@@ -250,7 +289,7 @@ button[type="submit"]:hover {
     left: 50%;
     transform: translateX(-50%);
     padding: 15px 25px;
-    background: #2ecc71;
+    background: #FF7D33;
     color: white;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
@@ -279,4 +318,27 @@ button[type="submit"]:hover {
     input, select, button {
         font-size: 16px !important;
     }
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+section.active-section {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Estilo para cuando no hay datos */
+.empty-state {
+    text-align: center;
+    padding: 30px;
+    color: #888;
+}
+
+.empty-state i {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #ddd;
 }
