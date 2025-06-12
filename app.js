@@ -7,17 +7,6 @@ function generarId() {
     return Date.now().toString(36) + Math.random().toString(36).substr(2);
 }
 
-// Función para obtener fecha local legible
-function obtenerFechaLegible() {
-    return new Date().toLocaleDateString('es-ES', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-    });
-}
-
 // DOM Elements
 const secciones = {
     ejercicios: document.getElementById('seccionEjercicios'),
@@ -78,8 +67,7 @@ function guardarEjercicio(e) {
         unidad: document.getElementById('unidadPeso').value,
         repMin: parseInt(document.getElementById('repMin').value),
         repMax: parseInt(document.getElementById('repMax').value),
-        fecha: new Date().toISOString(),  // Guardamos fecha completa
-        fechaLegible: obtenerFechaLegible()  // Y versión legible
+        fecha: new Date().toISOString().split('T')[0]
     };
     
     if (!validarEjercicio(ejercicio)) return;
@@ -99,8 +87,7 @@ function guardarPeso(e) {
         id: generarId(),
         peso: parseFloat(document.getElementById('pesoActual').value),
         unidad: document.getElementById('unidadPesoActual').value,
-        fecha: new Date().toISOString(),  // Guardamos fecha completa
-        fechaLegible: obtenerFechaLegible()  // Y versión legible
+        fecha: new Date().toISOString().split('T')[0]
     };
     
     if (isNaN(registro.peso)) {
@@ -164,7 +151,7 @@ function cargarRutinaSemanal() {
                 <h4><i class="fas fa-dumbbell"></i> ${ej.nombre}</h4>
                 <p><i class="fas fa-layer-group"></i> ${ej.series} series</p>
                 <p><i class="fas fa-weight-hanging"></i> ${ej.peso} ${ej.unidad} × ${ej.repMin}-${ej.repMax} repes</p>
-                <p><i class="fas fa-calendar"></i> ${ej.fechaLegible}</p>
+                <p><i class="fas fa-calendar"></i> ${formatFecha(ej.fecha)}</p>
             `;
             
             const botones = document.createElement('div');
@@ -197,12 +184,18 @@ function cargarHistorialPeso() {
         const registroElement = document.createElement('div');
         registroElement.className = 'registro-peso';
         registroElement.innerHTML = `
-            <div class="info-peso">
-                <span class="peso"><i class="fas fa-weight-hanging"></i> ${p.peso} ${p.unidad}</span>
-                <span class="fecha"><i class="fas fa-calendar"></i> ${p.fechaLegible}</span>
-            </div>
+            <span class="peso"><i class="fas fa-weight-hanging"></i> ${p.peso} ${p.unidad}</span>
+            <span class="fecha"><i class="fas fa-calendar"></i> ${formatFecha(p.fecha)}</span>
         `;
         
+        const botones = document.createElement('div');
+        botones.className = 'botones-edicion';
+        botones.innerHTML = `
+            <button onclick="editarPeso('${p.id}')"><i class="fas fa-edit"></i></button>
+            <button onclick="eliminarPeso('${p.id}')"><i class="fas fa-trash"></i></button>
+        `;
+        
+        registroElement.appendChild(botones);
         historialPeso.appendChild(registroElement);
     });
 }
@@ -219,9 +212,11 @@ function editarEjercicio(id) {
     document.getElementById('repMin').value = ej.repMin;
     document.getElementById('repMax').value = ej.repMax;
     
+    // Eliminar el ejercicio del array
     ejercicios = ejercicios.filter(e => e.id !== id);
     localStorage.setItem('ejercicios', JSON.stringify(ejercicios));
     cargarRutinaSemanal();
+    
     mostrarNotificacion('Ejercicio cargado para editar');
 }
 
@@ -232,6 +227,35 @@ function eliminarEjercicio(id) {
         cargarRutinaSemanal();
         mostrarNotificacion('Ejercicio eliminado');
     }
+}
+
+function editarPeso(id) {
+    const p = pesos.find(p => p.id === id);
+    if (!p) return;
+    
+    document.getElementById('pesoActual').value = p.peso;
+    document.getElementById('unidadPesoActual').value = p.unidad;
+    
+    // Eliminar el peso del array
+    pesos = pesos.filter(p => p.id !== id);
+    localStorage.setItem('pesos', JSON.stringify(pesos));
+    cargarHistorialPeso();
+    
+    mostrarNotificacion('Peso cargado para editar');
+}
+
+function eliminarPeso(id) {
+    if (confirm('¿Eliminar este registro de peso?')) {
+        pesos = pesos.filter(p => p.id !== id);
+        localStorage.setItem('pesos', JSON.stringify(pesos));
+        cargarHistorialPeso();
+        mostrarNotificacion('Registro de peso eliminado');
+    }
+}
+
+function formatFecha(fechaStr) {
+    const opciones = { year: 'numeric', month: 'short', day: 'numeric' };
+    return new Date(fechaStr).toLocaleDateString('es-ES', opciones);
 }
 
 function mostrarNotificacion(mensaje, tipo = 'exito') {
@@ -255,3 +279,5 @@ function mostrarNotificacion(mensaje, tipo = 'exito') {
 // Hacer funciones accesibles globalmente
 window.editarEjercicio = editarEjercicio;
 window.eliminarEjercicio = eliminarEjercicio;
+window.editarPeso = editarPeso;
+window.eliminarPeso = eliminarPeso;
